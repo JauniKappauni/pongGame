@@ -20,12 +20,24 @@ float ballSpeedY = 200.0f;
 int playerOneScore = 0;
 int playerTwoScore = 0;
 
+bool isGameStarted = false;
+
 int main()
 {
     InitWindow(screenWidth, screenHeight, "Pong Game");
 
     while (!WindowShouldClose())
     {
+        if(!isGameStarted){
+            BeginDrawing();
+            ClearBackground(BLACK);
+            DrawText("Press SPACE to start", 250, 180, 20, WHITE);
+            EndDrawing();
+            if(IsKeyPressed(KEY_SPACE)){
+                isGameStarted = true;
+            }
+            continue;
+        }
         float dt = GetFrameTime();
         BeginDrawing();
         ClearBackground(BLACK);
