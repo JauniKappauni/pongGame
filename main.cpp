@@ -1,4 +1,7 @@
 #include <raylib.h>
+#include <stdlib.h>
+#include <string>
+using namespace std;
 
 float speed = 200.0f;
 
@@ -13,6 +16,9 @@ float ballY = 200.0f;
 float ballR = 5.0f;
 float ballSpeedX = 200.0f;
 float ballSpeedY = 200.0f;
+
+int playerOneScore = 0;
+int playerTwoScore = 0;
 
 int main()
 {
@@ -61,6 +67,22 @@ int main()
             ballSpeedX *= -1;
         }
 
+        if (ballX > screenWidth)
+        {
+            playerOneScore++;
+            ballX = 400;
+        }
+        if (ballX < 0)
+        {
+            playerTwoScore++;
+            ballX = 400;
+        }
+
+        string score = to_string(playerOneScore);
+        string score2 = to_string(playerTwoScore);
+
+        DrawText(score.data(), 350, 10, 25, WHITE);
+        DrawText(score2.data(), 450, 10, 25, WHITE);
         EndDrawing();
     }
 
