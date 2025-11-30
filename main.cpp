@@ -28,12 +28,17 @@ int main()
 
     while (!WindowShouldClose())
     {
-        if(!isGameStarted){
+        if (!isGameStarted)
+        {
+            Vector2 mouse = GetMousePosition();
+            Rectangle btn = {300, 150, 200, 100};
             BeginDrawing();
             ClearBackground(BLACK);
-            DrawText("Press SPACE to start", 250, 180, 20, WHITE);
+            DrawRectangleRec(btn, GRAY);
+            DrawText("Start", 380, 180, 20, WHITE);
             EndDrawing();
-            if(IsKeyPressed(KEY_SPACE)){
+            if (CheckCollisionPointRec(mouse, btn) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
                 isGameStarted = true;
             }
             continue;
