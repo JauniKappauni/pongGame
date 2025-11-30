@@ -3,7 +3,7 @@
 #include <string>
 using namespace std;
 
-float speed = 200.0f;
+float speed = 500.0f;
 
 float playerOnePosY = 0;
 float playerTwoPosY = 0;
@@ -61,21 +61,25 @@ int main()
         if (ballX < 10 && ballY >= playerOnePosY && ballY <= playerOnePosY + 100)
         {
             ballSpeedX *= -1;
+            ballSpeedX += 100;
         }
         if (ballX > 790 && ballY >= playerTwoPosY && ballY <= playerTwoPosY + 100)
         {
             ballSpeedX *= -1;
+            ballSpeedX -= 100;
         }
 
         if (ballX > screenWidth)
         {
             playerOneScore++;
             ballX = 400;
+            ballSpeedX = 200;
         }
         if (ballX < 0)
         {
             playerTwoScore++;
             ballX = 400;
+            ballSpeedX = -200;
         }
 
         string score = to_string(playerOneScore);
