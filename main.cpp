@@ -1,12 +1,18 @@
 #include <raylib.h>
 
-float speed = 100.0f;
+float speed = 200.0f;
 
 float playerOnePosY = 0;
 float playerTwoPosY = 0;
 
 int screenWidth = 800;
 int screenHeight = 400;
+
+float ballX = 400.0f;
+float ballY = 200.0f;
+float ballR = 5.0f;
+float ballSpeedX = 200.0f;
+float ballSpeedY = 200.0f;
 
 int main()
 {
@@ -35,6 +41,24 @@ int main()
         if (IsKeyDown(KEY_DOWN) && playerTwoPosY + 100 < screenHeight)
         {
             playerTwoPosY += speed * dt;
+        }
+
+        ballX += ballSpeedX * dt;
+        ballY += ballSpeedY * dt;
+
+        DrawCircle(ballX, ballY, ballR, WHITE);
+
+        if (ballY < 0 || ballY > screenHeight)
+        {
+            ballSpeedY *= -1;
+        }
+        if (ballX < 10 && ballY >= playerOnePosY && ballY <= playerOnePosY + 100)
+        {
+            ballSpeedX *= -1;
+        }
+        if (ballX > 790 && ballY >= playerTwoPosY && ballY <= playerTwoPosY + 100)
+        {
+            ballSpeedX *= -1;
         }
 
         EndDrawing();
