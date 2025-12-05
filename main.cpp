@@ -21,6 +21,7 @@ int playerOneScore = 0;
 int playerTwoScore = 0;
 
 bool isGameStarted = false;
+bool pauseMenuActive = false;
 
 int main()
 {
@@ -28,20 +29,57 @@ int main()
     SetExitKey(KEY_NULL);
     while (!WindowShouldClose())
     {
+        if (IsKeyPressed(KEY_P))
+        {
+            pauseMenuActive = !pauseMenuActive;
+        }
+        if (pauseMenuActive)
+        {
+            BeginDrawing();
+            ClearBackground(BLACK);
+            DrawText("Pause Menu", 400, 200, 50, WHITE);
+            Vector2 mouse = GetMousePosition();
+            Rectangle btn = {300, 100, 200, 100};
+            Rectangle btn2 = {300, 250, 200, 100};
+            ClearBackground(BLACK);
+            DrawRectangleRec(btn, GRAY);
+            DrawRectangleRec(btn2, GRAY);
+            DrawText("Resume", 370, 150, 20, WHITE);
+            DrawText("Quit", 370, 300, 20, WHITE);
+            if (CheckCollisionPointRec(mouse, btn) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                pauseMenuActive = false;
+            }
+
+            if (CheckCollisionPointRec(mouse, btn2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                CloseWindow();
+            }
+            EndDrawing();
+            continue;
+        }
         if (!isGameStarted)
         {
             Vector2 mouse = GetMousePosition();
-            Rectangle btn = {300, 150, 200, 100};
+            Rectangle btn = {300, 100, 200, 100};
+            Rectangle btn2 = {300, 250, 200, 100};
             BeginDrawing();
             ClearBackground(BLACK);
             DrawRectangleRec(btn, GRAY);
-            DrawText("Start", 380, 180, 20, WHITE);
+            DrawRectangleRec(btn2, GRAY);
+            DrawText("Start", 370, 150, 20, WHITE);
+            DrawText("Quit", 370, 300, 20, WHITE);
             EndDrawing();
             if (CheckCollisionPointRec(mouse, btn) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
             {
                 isGameStarted = true;
             }
+            if (CheckCollisionPointRec(mouse, btn2) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+            {
+                CloseWindow();
+            }
             continue;
+
         }
         float dt = GetFrameTime();
         BeginDrawing();
