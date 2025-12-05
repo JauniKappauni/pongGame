@@ -25,7 +25,7 @@ bool isGameStarted = false;
 int main()
 {
     InitWindow(screenWidth, screenHeight, "Pong Game");
-
+    SetExitKey(KEY_NULL);
     while (!WindowShouldClose())
     {
         if (!isGameStarted)
